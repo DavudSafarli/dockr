@@ -1,0 +1,4 @@
+[submodule "cli"]
+	path = cli
+	url = https://github.com/DavudSafarli/dockr-cli.git
+	branch = master

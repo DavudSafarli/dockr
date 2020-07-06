@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import '@/assets/styles/style.scss';
+import * as types from '@/@types/global.d.ts';
 
 Vue.config.productionTip = true
 
-
-import '@/assets/styles/style.scss';
 
 new Vue({
   router,

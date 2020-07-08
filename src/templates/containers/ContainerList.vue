@@ -2,7 +2,7 @@
   <div>
     <container-list-item v-for="container in containers" 
     :key="container.Id" :container="container"
-    class="py-2 border-b px-12 cursor-pointer hover:bg-gray-300">
+    class="py-3 border-b px-12 cursor-pointer hover:bg-gray-300">
     </container-list-item>
   </div>
 </template>

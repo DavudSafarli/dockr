@@ -20,8 +20,14 @@ export type ContainerBriefInfo = {
 }
 
 type Port = {
-  IP: string,
+  IP?: string,
   PrivatePort: number,
-  PublicPort: number,
+  PublicPort?: number,
   Type: string,
+}
+
+type IconOptions = {
+  iconComponent?: Function,
+  class?: string,
+  onclick?: Function,
 }

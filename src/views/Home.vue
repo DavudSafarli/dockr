@@ -1,5 +1,5 @@
 <template>
-  <div class="home p-3">
+  <div class="home">
     <container-list :containers="containers"></container-list>
   </div>
 </template>

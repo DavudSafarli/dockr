@@ -13,9 +13,21 @@ export default Vue.extend({
     containers: {} as Containers,
   }),
   created() {
+    this.registerListener()
     this.loadContainers()
   },
+  beforeDestroy() {
+    this.unregisterListener()
+  },
   methods: {
+    registerListener() {
+      window.api.Events.RegisterEventListener((data) => {
+        console.log(data);
+      })
+    },
+    unregisterListener() {
+      window.api.Events.UnregisterEventListener()
+    },
     loadContainers() {
       window.api.GetContainers().then(containers => {
         this.containers = containers

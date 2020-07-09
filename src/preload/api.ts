@@ -1,6 +1,7 @@
 import { contextBridge } from "electron";
 import {execFile} from 'child_process'
 import { parse, dockrcli } from './utils';
+import Events from './events';
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
@@ -27,5 +28,9 @@ contextBridge.exposeInMainWorld(
                 })
             })
         },
+        Events: {
+            RegisterEventListener: Events.RegisterEventListener,
+            UnregisterEventListener: Events.UnregisterEventListener,
+        }
     } as ElectronPreloadAPI,
 );

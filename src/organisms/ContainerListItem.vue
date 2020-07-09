@@ -16,7 +16,6 @@ export default Vue.extend({
     container: <PropOptions<Container>> {
       type: Object
     },
-    buttons: <PropOptions<Array<IconOptions>>> Array
   },
   created() {
     // @ts-ignore

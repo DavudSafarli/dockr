@@ -6,21 +6,19 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Container } from '@/@types';
+import { Containers } from '@/@types';
 
 export default Vue.extend({
   data: () => ({
-    containers: [] as Array<Container>,
+    containers: {} as Containers,
   }),
   created() {
     this.loadContainers()
   },
   methods: {
     loadContainers() {
-      window.api.GetContainers().then(containersJSON => {
-        this.containers = JSON.parse(JSON.parse(containersJSON))
-      }).catch(e => {
-        console.error(e)
+      window.api.GetContainers().then(containers => {
+        this.containers = containers
       })
     }
   },

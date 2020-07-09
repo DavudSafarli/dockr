@@ -10,12 +10,12 @@
 <script lang="ts">
 // @ is an alias to /src
 import Vue, { PropOptions } from 'vue';
-import { Container } from '@/@types';
+import { Containers } from '@/@types';
 
 export default Vue.extend({
   props: {
-    containers: <PropOptions<Array<Container>>> {
-      type: Array
+    containers: <PropOptions<Containers>> {
+      type: Object
     }
 
   },

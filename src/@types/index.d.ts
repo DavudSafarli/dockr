@@ -1,5 +1,7 @@
 import { ContainerState } from "./enums/ContainerState"
 
+type Containers = Map<string, Container>
+
 export interface Container {
   Id: string,
   Image: string,

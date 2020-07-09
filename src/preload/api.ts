@@ -1,6 +1,6 @@
 import { contextBridge } from "electron";
 import {execFile} from 'child_process'
-import path from 'path'
+import { parse, dockrcli } from './utils';
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
@@ -8,9 +8,8 @@ contextBridge.exposeInMainWorld(
     "api", {
         GetContainers: async () => {
             return new Promise((resolve, reject) => {
-                let exefile = path.join(__dirname, 'dockr.exe');
                 console.log('run dockr.exe');
-                let child = execFile(exefile, ['ls'], {
+                let child = execFile(dockrcli, ['ls'], {
                     timeout: 1000
                 },(error, stdout, stderr) => {
                     console.log('dockr.exe returned');
@@ -21,7 +20,7 @@ contextBridge.exposeInMainWorld(
                         reject(stderr)
                     }
                     if(stdout) {
-                        resolve(stdout)
+                        resolve(parse(stdout))
                     }
                     child.kill()
                     return

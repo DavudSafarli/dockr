@@ -7,23 +7,33 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Containers } from '@/@types';
+import { Message } from '../@types/events';
+import { ContainerState } from '../@types/enums/ContainerState';
 
 export default Vue.extend({
   data: () => ({
     containers: {} as Containers,
   }),
-  created() {
+  mounted() {
     this.registerListener()
     this.loadContainers()
   },
-  beforeDestroy() {
+  destroyed() {
     this.unregisterListener()
   },
   methods: {
     registerListener() {
-      window.api.Events.RegisterEventListener((data) => {
-        console.log(data);
-      })
+      window.api.Events.RegisterEventListener(this.eventHandler)
+    },
+    eventHandler(message: Message) {
+      let container = this.containers[message.id!]
+
+      if(message.status == "start") {
+        container.State = ContainerState.running
+      }else {
+        container.State = ContainerState.exited
+      }
+
     },
     unregisterListener() {
       window.api.Events.UnregisterEventListener()

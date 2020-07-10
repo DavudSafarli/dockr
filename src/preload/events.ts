@@ -1,9 +1,11 @@
 import { execFile, ChildProcess } from 'child_process';
 import { parse, dockrcli } from './utils';
+import { EventInterface } from '@/@types/global';
+import { Message } from '@/@types/events';
 
-class Events {
+class Events implements EventInterface {
     private static instance: Events;
-    private static listener: (listener: (chunk: any) => void) => void;
+    private static listener: (chunk: Message) => void;
     private static process: ChildProcess;
     private constructor() { }
 
@@ -16,14 +18,23 @@ class Events {
     }
 
 
-    public RegisterEventListener(listener: (chunk: any) => void): void {
+    public RegisterEventListener(listener: (chunk: Message) => void): void {
         Events.listener = listener;
-        console.log('RegisterEventListener');
         
         Events.process = execFile(dockrcli, ['listen'])
         Events.process.stdout!.on("data", data => {
-            if(Events.listener)
-                Events.listener(parse(data))
+
+            if(!Events.listener) return;
+
+            const chunks: Array<string> = data.trim().split("\n")
+            chunks.forEach(chunk => {
+                try {
+                    Events.listener(parse(chunk))   
+                } catch (error) {
+                    console.error(error)
+                }
+            });
+
         })
     }
     

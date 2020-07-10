@@ -14,12 +14,14 @@ enum Size {
 export default Vue.extend({
   props: {
     size: <PropOptions<Size>> String,
+    nocolor: <PropOptions<boolean>> Boolean,
   },
   computed: {
     classes() : object {
       return {
         "font-bold": this.size == Size.Primary,
-        "text-xs text-gray-600": this.size == Size.Secondary,
+        "text-xs": this.size == Size.Secondary,
+        "text-gray-600": this.size == Size.Secondary && !this.nocolor
       }
     }
   }

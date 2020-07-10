@@ -1,11 +1,11 @@
 <template>
   <div class="flex flex-col items-start leading-none">
-    <div class="flex items-end ">
-      <v-text size="lg" class="mr-2">{{shortName}}</v-text>
+    <div class="flex items-end">
+      <v-text size="lg" :class="nameClasses">{{shortName}}</v-text>
       <v-text size="sm">{{brief.image}}</v-text>
     </div>
-    <div class="">
-      <v-text size="sm" class="mr-2">{{stateBrief}}</v-text>
+    <div>
+      <v-text size="sm" nocolor :class="nameClasses">{{stateBrief}}</v-text>
       <v-text size="sm">{{portString}}</v-text>
     </div>
   </div>
@@ -22,18 +22,22 @@ export default Vue.extend({
     brief: <PropOptions<ContainerBriefInfo>> Object,
   },
   computed: {
+    nameClasses(): object {
+      const isRunning = this.brief.state.in([ContainerState.running])
+      return {
+        'mr-2': true,
+        'text-success': isRunning,
+        'group-hover:text-success-light': isRunning,
+        'text-gray-600': !isRunning,
+        'group-hover:text-gray-900': !isRunning,
+      }
+    },
     shortName(): string {
       return this.brief?.name?.substr(0, 40)
     },
     stateBrief() : string {
       let b = this.brief
-      if (b.state == ContainerState.running) {
-        return `${b.state} ${b.status.split(' ').slice(-2).join(' ')}`
-      }
-      else if (b.state == ContainerState.exited) {
-        return `${b.state} ${b.status.split(' ').slice(-3).join(' ')}`
-      }
-      return ""
+      return b.state
     },
     portString(): string {
       return this.brief.ports!

@@ -18,7 +18,12 @@ export default Vue.extend({
   computed: {
     classes(): object {
       return {
-        'border rounded-full p-0.5 w-8 fill-current': true,
+        'p-0.5 w-8': true,
+        'border rounded-full': true,
+        'fill-current': true,
+        'focus:outline-none': true,
+        'hover:shadow-md': true,
+        'hover:-mt-1': true,
         [this.options.class!] : this.options.class,
       }
     },

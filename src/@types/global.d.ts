@@ -14,6 +14,10 @@ declare global {
     api: ElectronPreloadAPI
   }  
 
+  interface String {
+    in: (arr: Array<string>) => boolean;
+  }
+
 }
 
 export interface ContainerInterface {

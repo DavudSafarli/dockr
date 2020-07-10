@@ -11,3 +11,8 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+
+String.prototype.in = function(arr: Array<string>) {
+  return arr.includes(this.toString())
+}

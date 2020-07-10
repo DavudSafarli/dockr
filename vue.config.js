@@ -1,7 +1,18 @@
+const fs = require('fs');
+const path = require('path');
+
+let folder = path.join('src', 'preload')
+let preloadFiles = fs.readdirSync(folder).reduce((acc, filename) => {
+  // first capturing group
+  let key = filename.match(/(.*)\.(js|ts)$/)[1]
+  acc[key] = `${folder}\\${filename}`
+  return acc
+}, {})
+
 module.exports = {
   pluginOptions: {
     electronBuilder: {
-      preload: 'src/preload/api.ts',
+      preload: preloadFiles,
       // Or, for multiple preload files:
       // preload: { preload: 'src/preload.js', otherPreload: 'src/preload2.js' }
       builderOptions: {

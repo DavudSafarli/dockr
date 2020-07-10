@@ -2,6 +2,7 @@ import { contextBridge } from "electron";
 import {execFile} from 'child_process'
 import { parse, dockrcli } from './utils';
 import Events from './events';
+import Container from './container';
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
@@ -23,10 +24,13 @@ contextBridge.exposeInMainWorld(
                     if(stdout) {
                         resolve(parse(stdout))
                     }
-                    child.kill()
                     return
                 })
             })
+        },
+        Container: {
+            Start: Container.Start,
+            Stop: Container.Stop,
         },
         Events: {
             RegisterEventListener: Events.RegisterEventListener,

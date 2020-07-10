@@ -1,6 +1,6 @@
 import { ContainerState } from "./enums/ContainerState"
 
-type Containers = Map<string, Container>
+type Containers = { [key: string]: Container; }
 
 interface Container {
   Id: string,

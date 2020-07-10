@@ -1,10 +1,12 @@
 import { Containers } from ".";
+import { Message } from "./events";
 
 // export something to make it module
 export {}
 declare global {
   interface ElectronPreloadAPI {
     GetContainers: () => Promise<Containers>;
+    Container: ContainerInterface;
     Events: EventInterface;
   }
 
@@ -14,8 +16,13 @@ declare global {
 
 }
 
-interface EventInterface {
-  RegisterEventListener: (listener: (chunk: any) => void) => void;
+export interface ContainerInterface {
+  Start: (id: string) => Promise<boolean>;
+  Stop: (id: string) => Promise<boolean>;
+}
+
+export interface EventInterface {
+  RegisterEventListener: (listener: (chunk: Message) => void) => void;
   UnregisterEventListener: () => void;
 
 }

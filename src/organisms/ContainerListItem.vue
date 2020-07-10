@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-between">
     <container-brief :brief="containerBriefInfo"></container-brief>
-    <container-button-group :buttonOptions="$options.buttonOptions"></container-button-group>
+    <container-button-group :buttonOptions="buttonOptions"></container-button-group>
   </div>
 </template>
 
@@ -17,27 +17,32 @@ export default Vue.extend({
       type: Object
     },
   },
-  created() {
-    // @ts-ignore
-    this.$options.buttonOptions = this.getButtonOptions();
-  },
-  methods: {
-    getButtonOptions(): Array<IconOptions> {
+  computed: {
+    buttonOptions(): Array<IconOptions> {
       const arr: Array<IconOptions> = [];
-      arr.push(this.getStartButtonOptions())
+      arr.push(this.startButtonOptions)
       
       arr.forEach(e => e.class = "border-river hover:border-belize text-river hover:text-belize")
       return arr
     },
-    getStartButtonOptions(): IconOptions {
+    startButtonOptions(): IconOptions {
       const c = this.container;
       const iconName = c.State == ContainerState.running ? "pause_circle_filled" : "play_circle_filled";
       return {
         iconComponent: () => import(`@/assets/icons/buttons/${iconName}.svg`),
+        onclick: () => {
+          if (this.container.State == ContainerState.running) {
+            window.api.Container.Stop(this.container.Id).then(e => {
+              console.log(e);
+            })
+          }else {
+            window.api.Container.Start(this.container.Id).then(e => {
+              console.log(e);
+            })
+          }
+        }
       }
-    }
-  },
-  computed: {
+    },
     containerBriefInfo() : ContainerBriefInfo {
       return {
         name: this.container?.Names.join(","),

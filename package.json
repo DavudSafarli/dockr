@@ -11,7 +11,7 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "go:build": "go build -o ./public/ main.go"
+    "go:build": "cd cli && go build -o ../public/dockr.exe ."
   },
   "dependencies": {
     "core-js": "^3.6.5",

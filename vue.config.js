@@ -5,7 +5,7 @@ let folder = path.join('src', 'preload')
 let preloadFiles = fs.readdirSync(folder).reduce((acc, filename) => {
   // first capturing group
   let key = filename.match(/(.*)\.(js|ts)$/)[1]
-  acc[key] = `${folder}\\${filename}`
+  acc[key] = `${folder.replace('\\', '/')}/${filename}`
   return acc
 }, {})
 

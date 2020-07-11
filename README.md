@@ -1,4 +1,4 @@
-# vuelectron
+# dockr
 
 ## Project setup
 Pull submodules 

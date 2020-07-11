@@ -4,6 +4,7 @@ import { Message } from "./events";
 // export something to make it module
 export {}
 declare global {
+  const __static: string
   interface ElectronPreloadAPI {
     GetContainers: () => Promise<Containers>;
     Container: ContainerInterface;

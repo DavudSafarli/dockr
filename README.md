@@ -29,4 +29,4 @@ npm run electron:build
 ```
 
 ### Current progress
-![Image of Yaktocat](https://raw.githubusercontent.com/DavudSafarli/dockr/master/src/assets/progress-1.png)
+![Image of Yaktocat](https://raw.githubusercontent.com/DavudSafarli/dockr/master/src/assets/progress/progress-2.png)

@@ -24,6 +24,7 @@ declare global {
 export interface ContainerInterface {
   Start: (id: string) => Promise<boolean>;
   Stop: (id: string) => Promise<boolean>;
+  Bash: (id: string) => Promise<boolean>;
 }
 
 export interface EventInterface {

@@ -1,4 +1,4 @@
-import { execFile } from 'child_process';
+import { execFile, spawn } from 'child_process';
 import { dockrcli } from './utils';
 import { ContainerInterface } from '@/@types/global';
 
@@ -33,6 +33,24 @@ class Container implements ContainerInterface {
     async Stop(id: string): Promise<boolean>{
         return new Promise((resolve, reject) => {
             const child = execFile(dockrcli, ['stop', id])
+            child.stdout!.on("data", (data) => {
+                resolve(true)
+                child.kill()
+            })
+            child.stdout!.on("error", (data) => {
+                reject(false)
+                child.kill()
+            })
+        })
+    }
+
+    async Bash(id: string): Promise<boolean>{
+        return new Promise((resolve, reject) => {
+            const child = spawn('docker',[`exec -it ${id} bash`], {
+                shell: true,
+                detached: true,
+            });
+
             child.stdout!.on("data", (data) => {
                 resolve(true)
                 child.kill()

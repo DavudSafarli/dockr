@@ -22,9 +22,8 @@ export default Vue.extend({
         'border rounded-full': true,
         'fill-current': true,
         'focus:outline-none': true,
-        'hover:shadow-md': true,
-        'hover:-mt-1': true,
-        [this.options.class!] : this.options.class,
+        'hover:shadow-md hover:-mt-1': !this.options.removeHoverEffect,
+        ...this.options.class,
       }
     },
     events(): object {

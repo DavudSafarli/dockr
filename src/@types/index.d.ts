@@ -30,6 +30,7 @@ type Port = {
 
 type IconOptions = {
   iconComponent?: Function,
-  class?: string,
+  class?: object,
   onclick?: Function,
+  removeHoverEffect?: boolean,
 }

@@ -15,6 +15,7 @@ export default Vue.extend({
   created() {
     this.$options['playIcon'] = () => import(`@/assets/icons/buttons/play_circle_filled.svg`)
     this.$options['pauseIcon'] = () => import(`@/assets/icons/buttons/pause_circle_filled.svg`)
+    this.$options['bashIcon'] = () => import(`@/assets/icons/buttons/bash.svg`)
   },
   props: {
     container: <PropOptions<Container>> {
@@ -34,26 +35,46 @@ export default Vue.extend({
       }else {
         window.api.Container.Start(this.container.Id).then(console.log)
       }
-    }
+    },
+    onBash() {
+      if (this.container.State != ContainerState.running) return
+
+      window.api.Container.Bash(this.container.Id).then(console.log)
+    },
   },
   computed: {
     buttonOptions(): Array<IconOptions> {
       const arr: Array<IconOptions> = [];
       arr.push(this.runButtonOptions)
+      arr.push(this.bashButtonOptions)
       
-      arr.forEach(e => e.class = "border-river hover:border-belize text-river hover:text-belize")
       return arr
+    },
+    bashButtonOptions(): IconOptions {
+      const isRunning = this.container.State.in([ContainerState.running])
+      const iconRendererFunc = this.$options['bashIcon']
+      return {
+        iconComponent: iconRendererFunc,
+        onclick: this.onBash,
+        class: {
+          'cursor-not-allowed': !isRunning,
+          'border-off text-off': !isRunning,
+          'border-river text-river hover:border-belize hover:text-belize': isRunning
+        },
+        removeHoverEffect: !isRunning,
+      }
     },
     runButtonOptions(): IconOptions {
       const iconRendererFunc = this.getIconRenderFunc()
       return {
         iconComponent: iconRendererFunc,
-        onclick: this.onRun
+        onclick: this.onRun,
+        class: {'border-river text-river hover:border-belize hover:text-belize': true}
       }
     },
     containerBriefInfo() : ContainerBriefInfo {
       return {
-        name: this.container?.Names.join(","),
+        name: this.container?.Names.join(','),
         image: this.container?.Image,
         ports: this.container?.Ports,
         state: this.container?.State,

@@ -19,6 +19,7 @@ module.exports = {
       white: '#fff',
       river: '#3498db',
       belize: '#2b6e9a',
+      off: '#bdc3c7',
       success: '#1ea593',
       'success-light': '#23c3ad',
       error: '#bd271e',

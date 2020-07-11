@@ -9,9 +9,13 @@ Install dependencies
 ```
 npm install
 ```
-If you have go environment, build go executable and move to public directory 
+To build go executable, if you have go environment:
 ```
 npm run go:build
+```
+or else, if you have docker:
+```
+./build.sh
 ```
 
 ### Compiles and hot-reloads for development

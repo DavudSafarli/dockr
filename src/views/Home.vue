@@ -30,7 +30,7 @@ export default Vue.extend({
 
       if(message.status == "start") {
         container.State = ContainerState.running
-      }else {
+      }else if(message.status == "die") {
         container.State = ContainerState.exited
       }
 

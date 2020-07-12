@@ -14,6 +14,20 @@ class Container implements ContainerInterface {
         return Container.instance;
     }
     
+    async Remove(id: string): Promise<boolean>{
+        return new Promise((resolve, reject) => {
+            const child = execFile(dockrcli, ['rm', id])
+            child.stdout!.on("data", (data) => {
+                resolve(true)
+                child.kill()
+            })
+            child.stderr!.on("data", (data) => {
+                reject(false)
+                child.kill()
+            })
+        })
+    }
+    
     Start(id: string): Promise<boolean>{
 
         return new Promise((resolve, reject) => {
@@ -46,21 +60,13 @@ class Container implements ContainerInterface {
 
     async Bash(id: string): Promise<boolean>{
         return new Promise((resolve, reject) => {
-            const child = spawn('docker',[`exec -it ${id} bash`], {
+            spawn('docker',[`exec -it ${id} bash`], {
                 shell: true,
                 detached: true,
             });
-
-            child.stdout!.on("data", (data) => {
-                resolve(true)
-                child.kill()
-            })
-            child.stdout!.on("error", (data) => {
-                reject(false)
-                child.kill()
-            })
         })
     }
+
 
 }
 export default Container.getInstance()

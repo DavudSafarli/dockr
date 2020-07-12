@@ -28,10 +28,12 @@ export default Vue.extend({
     eventHandler(message: Message) {
       let container = this.containers[message.id!]
 
-      if(message.status == "start") {
+      if(message.Action == "start") {
         container.State = ContainerState.running
-      }else if(message.status == "die") {
+      }else if(message.Action == "die") {
         container.State = ContainerState.exited
+      }else if(message.Action == "destroy") {
+        this.$delete(this.containers, message.id!)
       }
 
     },

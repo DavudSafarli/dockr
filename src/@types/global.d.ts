@@ -6,7 +6,6 @@ export {}
 declare global {
   const __static: string
   interface ElectronPreloadAPI {
-    GetContainers: () => Promise<Containers>;
     Container: ContainerInterface;
     Events: EventInterface;
   }
@@ -22,6 +21,7 @@ declare global {
 }
 
 export interface ContainerInterface {
+  List: () => Promise<Containers>;
   Start: (id: string) => Promise<boolean>;
   Stop: (id: string) => Promise<boolean>;
   Bash: (id: string) => Promise<boolean>;

@@ -41,7 +41,7 @@ export default Vue.extend({
       window.api.Events.UnregisterEventListener()
     },
     loadContainers() {
-      window.api.GetContainers().then(containers => {
+      window.api.Container.List().then(containers => {
         this.containers = containers
       })
     }

@@ -1,6 +1,4 @@
 import { contextBridge } from "electron";
-import {execFile} from 'child_process'
-import { parse, dockrcli } from './utils';
 import Events from './events';
 import Container from './container';
 
@@ -8,35 +6,17 @@ import Container from './container';
 // the ipcRenderer without exposing the entire object
 
 const exposedObject: ElectronPreloadAPI = {
-    GetContainers: async () => {
-        return new Promise((resolve, reject) => {
-            let child = execFile(dockrcli, ['ls'], {
-                timeout: 1000
-            },(error, stdout, stderr) => {
-                if(error) {
-                    reject(error.toString())
-                }
-                if (stderr) {
-                    reject(stderr)
-                }
-                if(stdout) {
-                    resolve(parse(stdout))
-                }
-                return
-            })
-        })
-    },
     Container: {
         Start: Container.Start,
         Stop: Container.Stop,
         Bash: Container.Bash,
         Remove: Container.Remove,
+        List: Container.List,
     },
     Events: {
         RegisterEventListener: Events.RegisterEventListener,
         UnregisterEventListener: Events.UnregisterEventListener,
     }
-} 
-
+}
 
 contextBridge.exposeInMainWorld("api", exposedObject);

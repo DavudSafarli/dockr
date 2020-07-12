@@ -1,6 +1,7 @@
 import { execFile, spawn } from 'child_process';
-import { dockrcli } from './utils';
+import { dockrcli, parse } from './utils';
 import { ContainerInterface } from '@/@types/global';
+import { Containers } from '@/@types';
 
 class Container implements ContainerInterface {
     private static instance: Container;
@@ -13,21 +14,7 @@ class Container implements ContainerInterface {
         
         return Container.instance;
     }
-    
-    async Remove(id: string): Promise<boolean>{
-        return new Promise((resolve, reject) => {
-            const child = execFile(dockrcli, ['rm', id])
-            child.stdout!.on("data", (data) => {
-                resolve(true)
-                child.kill()
-            })
-            child.stderr!.on("data", (data) => {
-                reject(false)
-                child.kill()
-            })
-        })
-    }
-    
+
     Start(id: string): Promise<boolean>{
 
         return new Promise((resolve, reject) => {
@@ -67,6 +54,35 @@ class Container implements ContainerInterface {
         })
     }
 
+    List(): Promise<Containers>{
+
+        return new Promise((resolve, reject) => {
+            
+            const child = execFile(dockrcli, ['ls'])
+            child.stdout!.on("data", (data) => {
+                resolve(parse(data))
+                child.kill()
+            })
+            child.stdout!.on("error", (data) => {
+                reject(data)
+                child.kill()
+            })
+        })
+    }
+
+    async Remove(id: string): Promise<boolean>{
+        return new Promise((resolve, reject) => {
+            const child = execFile(dockrcli, ['rm', id])
+            child.stdout!.on("data", (data) => {
+                resolve(true)
+                child.kill()
+            })
+            child.stderr!.on("data", (data) => {
+                reject(false)
+                child.kill()
+            })
+        })
+    }
 
 }
 export default Container.getInstance()

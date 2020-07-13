@@ -9,17 +9,20 @@ import Vue from 'vue';
 import { Containers } from '@/@types';
 import { Message } from '../@types/events';
 import { ContainerState } from '../@types/enums/ContainerState';
+import { store, mutations } from '../store';
 
 export default Vue.extend({
-  data: () => ({
-    containers: {} as Containers,
-  }),
   mounted() {
     this.registerListener()
     this.loadContainers()
   },
   destroyed() {
     this.unregisterListener()
+  },
+  computed: {
+    containers() {
+      return store.containers
+    }
   },
   methods: {
     registerListener() {
@@ -35,14 +38,13 @@ export default Vue.extend({
       }else if(message.Action == "destroy") {
         this.$delete(this.containers, message.id!)
       }
-
     },
     unregisterListener() {
       window.api.Events.UnregisterEventListener()
     },
     loadContainers() {
       window.api.Container.List().then(containers => {
-        this.containers = containers
+        mutations.setContainers(containers)
       })
     }
   },

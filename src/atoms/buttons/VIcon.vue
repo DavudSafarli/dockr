@@ -1,9 +1,9 @@
 <template>
-  <button type="button" style="transition: all .15s ease"
+  <div style="transition: all .15s ease"
     :class="classes">
-    <component :is="options.iconComponent" 
+    <component :class="options.svgClass" :is="options.iconComponent" 
     v-on="events"></component>
-  </button>
+  </div>
 </template>
 
 <script lang="ts">

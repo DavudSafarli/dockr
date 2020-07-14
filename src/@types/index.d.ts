@@ -1,6 +1,7 @@
 import { ContainerState } from "./enums/ContainerState"
 
-type Containers = { [key: string]: Container; }
+type Dict<T> = { [key: string]: T; }
+type Containers = Dict<Container>
 
 interface Container {
   Id: string,
@@ -33,4 +34,11 @@ type IconOptions = {
   class?: object,
   onclick?: Function,
   removeHoverEffect?: boolean,
+  svgClass?: object
+}
+
+type ITabOptions = {
+  id: any
+  title: string
+  iconOptions?: IconOptions
 }

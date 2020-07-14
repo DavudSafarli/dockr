@@ -8,7 +8,5 @@ export const store = Vue.observable({
 export const mutations = {
   setContainers(containers: Containers) {
     store.containers = containers
-    console.log(store);
-    
   }
 }

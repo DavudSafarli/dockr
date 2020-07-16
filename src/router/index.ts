@@ -1,13 +1,23 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 
+export enum Routes {
+  Home = 'home',
+  Details = 'details',
+}
+
 Vue.use(VueRouter)
 
-  const routes: Array<RouteConfig> = [
+const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import('@/views/Home.vue'),
+    name: Routes.Home,
+    component: require('@/views/Home.vue').default,
+  },
+  {
+    path: '/container/:id',
+    name: Routes.Details,
+    component: require('@/views/Details.vue').default,
   },
 ]
 

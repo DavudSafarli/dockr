@@ -37,8 +37,14 @@ type IconOptions = {
   svgClass?: object
 }
 
-type ITabOptions = {
+type TabOptions = {
   id: any
   title: string
   iconOptions?: IconOptions
+}
+
+type TabsOptions = {
+  sliderColor: String,
+  color: String,
+  backgroundColor: String,
 }

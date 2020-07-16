@@ -8,5 +8,12 @@ export const store = Vue.observable({
 export const mutations = {
   setContainers(containers: Containers) {
     store.containers = containers
+  },
+}
+
+export const actions = {
+  async loadContainers() {
+    const containers = await window.api.Container.List()
+    mutations.setContainers(containers)
   }
 }

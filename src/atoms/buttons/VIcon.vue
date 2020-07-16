@@ -19,10 +19,10 @@ export default Vue.extend({
     classes(): object {
       return {
         'p-0.5 w-8': true,
-        'border rounded-full': true,
         'fill-current': true,
         'focus:outline-none': true,
         'hover:shadow-md hover:-mt-1': !this.options.removeHoverEffect,
+        'cursor-pointer': this.options.onclick,
         ...this.options.class,
       }
     },

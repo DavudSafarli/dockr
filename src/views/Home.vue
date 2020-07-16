@@ -14,7 +14,6 @@ import { store, mutations } from '../store';
 export default Vue.extend({
   mounted() {
     this.registerListener()
-    this.loadContainers()
   },
   destroyed() {
     this.unregisterListener()
@@ -42,11 +41,6 @@ export default Vue.extend({
     unregisterListener() {
       window.api.Events.UnregisterEventListener()
     },
-    loadContainers() {
-      window.api.Container.List().then(containers => {
-        mutations.setContainers(containers)
-      })
-    }
   },
   components: {
     ContainerList: () => import('@/templates/containers/ContainerList.vue'),

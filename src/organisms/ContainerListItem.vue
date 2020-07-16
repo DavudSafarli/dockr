@@ -30,19 +30,22 @@ export default Vue.extend({
       else
         return this.$options['playIcon']
     },
-    onRun() {
+    onRun(e: Event) {
+      e.stopPropagation()
       if (this.container.State == ContainerState.running) {
         window.api.Container.Stop(this.container.Id).then(console.log)
       }else {
         window.api.Container.Start(this.container.Id).then(console.log)
       }
     },
-    onBash() {
+    onBash(e: Event) {
+      e.stopPropagation()
       if (this.container.State != ContainerState.running) return
 
       window.api.Container.Bash(this.container.Id).then(console.log)
     },
-    onDelete() {
+    onDelete(e: Event) {
+      e.stopPropagation()
       window.api.Container.Remove(this.container.Id).then(console.log)
     },
   },
@@ -63,6 +66,7 @@ export default Vue.extend({
         onclick: this.onBash,
         class: {
           'cursor-not-allowed': !isRunning,
+          'border rounded-full': true,
           'border-off text-off': !isRunning,
           'border-river text-river hover:border-belize hover:text-belize': isRunning
         },
@@ -76,7 +80,8 @@ export default Vue.extend({
         iconComponent: iconRendererFunc,
         onclick: this.onDelete,
         class: {
-          'border-river text-river hover:border-belize hover:text-belize p-1': true
+          'border-river text-river hover:border-belize hover:text-belize p-1': true,
+          'border rounded-full': true,
         },
       }
     },
@@ -85,7 +90,10 @@ export default Vue.extend({
       return {
         iconComponent: iconRendererFunc,
         onclick: this.onRun,
-        class: {'border-river text-river hover:border-belize hover:text-belize': true}
+        class: {
+          'border-river text-river hover:border-belize hover:text-belize': true,
+          'border rounded-full': true,
+        }
       }
     },
     containerBriefInfo() : ContainerBriefInfo {

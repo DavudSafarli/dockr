@@ -1,9 +1,11 @@
 <template>
-  <div class="details">
+  <div class="details h-screen flex flex-col">
     <header-container class="pr-12 pl-2 py-3"></header-container>
-    <div class="flex w-5/6 mx-auto">
-      <tab-list v-model="currentTab" :tabs="tabs" class="w-1/4 m-2"></tab-list>
-      <component class="flex-grow" :is="currentTabComponent"/>
+    <div class="flex-grow flex  min-h-0">
+      <div class="mt-4 w-1/5 mx-auto">
+        <tab-list v-model="currentTab" :tabs="tabs" class=""></tab-list>
+      </div>
+      <component class="w-8/12" :is="currentTabComponent"/>
     </div>
   </div>
 </template>
@@ -74,3 +76,8 @@ export default Vue.extend({
 
 </script>
 
+<style lang="scss">
+.basis-0 {
+  flex-basis: 0;
+}
+</style>

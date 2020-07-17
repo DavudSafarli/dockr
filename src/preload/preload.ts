@@ -12,6 +12,7 @@ const exposedObject: ElectronPreloadAPI = {
         Bash: Container.Bash,
         Remove: Container.Remove,
         List: Container.List,
+        Logs: Container.Logs,
     },
     Events: {
         RegisterEventListener: Events.RegisterEventListener,

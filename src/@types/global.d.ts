@@ -26,6 +26,7 @@ export interface ContainerInterface {
   Stop: (id: string) => Promise<boolean>;
   Bash: (id: string) => Promise<boolean>;
   Remove: (id: string) => Promise<boolean>;
+  Logs: (id: string) => Promise<string>;
 }
 
 export interface EventInterface {

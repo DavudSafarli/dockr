@@ -84,5 +84,19 @@ class Container implements ContainerInterface {
         })
     }
 
+    async Logs(id: string): Promise<string>{
+        return new Promise((resolve, reject) => {
+            const child = execFile('docker', ['logs', id])
+            child.stdout!.on("data", (data) => {
+                resolve(data)
+                child.kill()
+            })
+            child.stderr!.on("data", (data) => {
+                reject(false)
+                child.kill()
+            })
+        })
+    }
+
 }
 export default Container.getInstance()

@@ -10,7 +10,7 @@
 import Vue, { PropOptions } from 'vue';
 import { store } from '../../store';
 import { IconOptions } from '../../@types';
-import { COLOR } from '../../utils/colors';
+import { COLOR } from "@/utils/colors";
 
 export default Vue.extend({
   computed: {

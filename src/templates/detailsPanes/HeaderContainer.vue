@@ -26,7 +26,6 @@ export default Vue.extend({
     }
   },
   components: {
-    VIcon: require('@/atoms/buttons/VIcon.vue').default,
     ContainerListItem: require('@/organisms/ContainerListItem.vue').default,
   }
 })

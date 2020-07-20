@@ -26,7 +26,6 @@ export default Vue.extend({
     on.call(this)
   },
   components: {
-		VIcon: () => import('@/atoms/buttons/VIcon.vue'),
 		VText: () => import('@/atoms/texts/VText.vue'),
 	}
 })

@@ -71,7 +71,7 @@ export default Vue.extend({
     ContainerLogsPane: require('@/templates/detailsPanes/ContainerLogsPane.vue').default,
     ContainerStatsPane: require('@/templates/detailsPanes/ContainerStatsPane.vue').default,
     HeaderContainer: require('@/templates/detailsPanes/HeaderContainer.vue').default,
-  }
+	}
 })
 
 </script>

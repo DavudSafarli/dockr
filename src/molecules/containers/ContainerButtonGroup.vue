@@ -15,7 +15,6 @@ export default Vue.extend({
     buttonOptions: <PropOptions<Array<IconOptions>>> Array,
   },
   components: {
-    VIcon: () => import('@/atoms/buttons/VIcon.vue'),
   }
 })
 </script>

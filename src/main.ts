@@ -4,6 +4,7 @@ import router from './router'
 import '@/assets/styles/style.scss';
 import * as types from '@/@types/global.d.ts';
 import { store, mutations, actions } from './store';
+import '@/global_components'
 
 Vue.config.productionTip = true
 

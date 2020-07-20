@@ -2,10 +2,15 @@
   <div class="flex flex-col">
     <div class="flex-1 min-h-0">
       <div :class="$options.cmdAreaClasses">
-        <div v-for="(log, i) in logs" :key="i" class="break-words">{{log}}</div>
+        <div v-for="(log, i) in logs_" :key="i" class="break-words">{{log}}</div>
       </div>
     </div>
-    <div class="py-3">footer</div>
+    <div class="py-2 bg-gray-700 flex">
+      <div class="px-2 flex items-center">
+        <v-icon :icon="'search'" size="sm"></v-icon>
+      </div>
+      <v-input @input="search" v-model="searchTerm"></v-input>
+    </div>
   </div>
 </template>
 
@@ -18,9 +23,19 @@ import { COLOR } from "@/utils/colors";
 
 export default Vue.extend({
   data: () => ({
+    searchTerm: '',
     logs: [] as Array<string>,
+    logs_: [] as Array<string>,
   }),
   methods: {
+    search() {
+      if(!this.searchTerm) {
+        this.logs_ = this.logs
+        return
+      }
+
+      this.logs_ = this.logs.filter(line => line.indexOf(this.searchTerm) > 0)
+    },
     setOptions() {
       this.$options['cmdAreaClasses'] = {
         'pl-2 text-sm': true,
@@ -39,7 +54,7 @@ export default Vue.extend({
   async created() {
     let data = await window.api.Container.Logs(this.container.Id)
     this.setOptions()
-    this.logs = data.split('\n');
+    this.logs = this.logs_ = data.split('\n');
   },
 })
 </script>

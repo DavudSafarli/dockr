@@ -64,7 +64,7 @@ export default Vue.extend({
       return {
         iconComponent: iconRendererFunc,
         onclick: this.onBash,
-        class: {
+        outerClasses: {
           'cursor-not-allowed': !isRunning,
           'border rounded-full': true,
           'border-off text-off': !isRunning,
@@ -79,8 +79,8 @@ export default Vue.extend({
       return {
         iconComponent: iconRendererFunc,
         onclick: this.onDelete,
-        class: {
-          'border-river text-river hover:border-belize hover:text-belize p-1': true,
+        outerClasses: {
+          'border-river text-river hover:border-belize hover:text-belize': true,
           'border rounded-full': true,
         },
       }
@@ -90,7 +90,7 @@ export default Vue.extend({
       return {
         iconComponent: iconRendererFunc,
         onclick: this.onRun,
-        class: {
+        outerClasses: {
           'border-river text-river hover:border-belize hover:text-belize': true,
           'border rounded-full': true,
         }

@@ -1,7 +1,7 @@
 <template>
 	<div class="flex items-center px-2 py-1 cursor-pointer v-tab">
 		<div class="w-6 h-6 mr-4">
-			<v-icon :options="tab.iconOptions"
+			<v-icon v-bind="tab.iconOptions"
 			class="w-full h-full border-none">i</v-icon>
 		</div>
 		<span>{{tab.title}}</span>

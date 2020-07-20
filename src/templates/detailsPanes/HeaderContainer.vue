@@ -1,6 +1,6 @@
 <template>
   <div class="flex border-b items-center">
-    <v-icon class="w-8 mr-2 -mt-1" :options=backIconOptions></v-icon>
+    <v-icon class="w-8 mr-2 -mt-1" v-bind=backIconOptions></v-icon>
     <container-list-item class="flex-grow" :container=container></container-list-item>
   </div>
 </template>
@@ -21,7 +21,6 @@ export default Vue.extend({
       return {
         iconComponent: require('@/assets/icons/buttons/left.svg'),
         removeHoverEffect: true,
-        class: {},
         onclick: () => this.$router.push({name: 'home'})
       }
     }

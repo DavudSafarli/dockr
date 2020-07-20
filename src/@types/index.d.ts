@@ -30,11 +30,11 @@ type Port = {
 }
 
 type IconOptions = {
-  iconComponent?: Function,
-  class?: object,
+  iconComponent?: Function|Object,
+  outerClasses?: object,
   onclick?: Function,
   removeHoverEffect?: boolean,
-  svgClass?: object
+  innerClasses?: object,
 }
 
 type TabOptions = {

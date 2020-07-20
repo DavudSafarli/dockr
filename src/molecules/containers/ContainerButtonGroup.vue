@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center">
-    <v-icon v-for="(button, i) in buttonOptions" :key="i" :options="button"
+    <v-icon v-for="(button, i) in buttonOptions" :key="i" v-bind="button"
     class="mx-1">i</v-icon>
   </div>
 </template>

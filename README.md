@@ -32,5 +32,9 @@ npm run electron:serve
 npm run electron:build
 ```
 
-### Current progress
-![Image of Yaktocat](https://raw.githubusercontent.com/DavudSafarli/dockr/master/src/assets/progress/progress-2.png)
+### Progress
+![Progress1](https://raw.githubusercontent.com/DavudSafarli/dockr/master/src/assets/progress/progress-1.png)
+
+![Progress1](https://raw.githubusercontent.com/DavudSafarli/dockr/master/src/assets/progress/progress-2.png)
+
+![Progress1](https://raw.githubusercontent.com/DavudSafarli/dockr/master/src/assets/progress/progress-3-details-page.png)
